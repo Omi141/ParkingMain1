@@ -1,6 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("maven-publish")
 }
 
 kotlin {
@@ -20,7 +21,6 @@ kotlin {
         val ktorVersion = "2.1.1"
         val commonMain by getting{
             dependencies {
-                implementation("com.github.Omi141:ParkingMain:0.0.1")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 //implementation("com.parkingmain.lib:parkinglib:1.1")
 
@@ -67,5 +67,22 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 32
+    }
+}
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "com.parkingmain1.lib"
+            artifactId = "parkinglib1"
+            version = "1.1"
+            /*versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }*/
+        }
     }
 }
